@@ -1,0 +1,52 @@
+Requirments
+-----------
+Flash Builder 4 or better, must use AS3.
+
+Files Provided
+--------------
+- SVSWC.swc
+This file wills setup code hinting and load the SocialVibe Engagement API
+
+- SDK_Example.zip
+This is a project file which you should be able to import in Flash Builder
+
+Explanation
+-----------()
+The 'SVSWC.swc' in the lib folder, is a file which you will add to your library, and give you access to a class called 'SocialvibeProxy(debug:Boolean)'. 
+'debug' parameter indicates whether or not you are running this locally, and will give feedback when it can (via trace) instead of actually trying to do calls to the API.
+The API will not work properly until it's running in the SocialVibe engagement environment.
+
+Once you instantiate that class, you will have several calls at your disposal for purpose of tracking and various API functionalities.
+
+First be sure to call 'SocialvibeProxy::init()' and listen for the 'READY' event to fire before doing any subsequent calls to the API.
+
+Example
+-------
+SDK_Example.zip is a really bare bones application that shows the 2 things you MUST do in your engagement/app.
+
+1) File->Import the 'SDK_Example.zip' to your Flash Builder Environment.
+2) Notice that 'Project->Properties->Build Path' has SVSWC added to the libraries. This is required. You may have to change the path depending on your environment setup.
+3) In the main App class 'SDK_Example.as' you can see how we initialize the 'SocialvibeProxy' and wait for the READY event before building the app, in the constructor function.
+4) After the ready event, till the end of engagement, it's up to you to create the engagement as you see fit.
+
+Required API Calls
+------------------
+- SocialvibeProxy::engage()
+Make this call to signal the completion event for the engagement.  The completion event tells our system to grant the user the appropriate user benefit (i.e. Farm Cash on FarmVille) 
+
+- SocialvibeProxy::endEngage()
+Make this call after the engage() call at the point the engagement has ended and to show the user a 'congrats & share screen'.
+
+
+Things to note
+--------------
+- If you use external SWFs or Files make sure your crossdomain.xml is setup to handle *.socialvibe.com, *.socialvi.be, and *.svnetwork.com.
+
+- Once you are satisfied and ready to do a Release build, make sure to take it out of debug mode. You may want to do something like this to automate it.
+	if (Security.sandboxType == Security.LOCAL_TRUSTED)
+	{
+		//RUNNING LOCALLY
+	} else {
+		//LIVE
+	}
+	
