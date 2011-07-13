@@ -1,4 +1,4 @@
-Requirments
+Requirements
 -----------
 Flash Builder 4 or better, must use AS3.
 
@@ -10,6 +10,9 @@ This file will setup code hinting and load the SocialVibe Engagement API.
 - EngagementExample.as
 This is an example engagement using the SocialVibe Engagement API.
 
+Documentation
+-------------
+http://socialvibe.github.com/engagement_api/com/socialvibe/engagement/api/SocialVibeProxy.html
 
 Environment Setup
 -----------------
@@ -25,7 +28,7 @@ API Usage
 -----------
 The 'engagement_api.swc' in the lib folder, is a file which you will add to your library, and give you access to a class called 'SocialVibeProxy()'.  This proxy class gives you access to SocialVibe's engagement API.  When your engagement is running outside of SocialVibe's engagement environment, the proxy will run in 'unconnected mode'.  In this mode calls to the API will simply output trace statements and return placeholder values when necessary since it doesn't have an instance of the API to proxy calls to.
 
-Once you instantiate the SocialVibeProxy() class, you will have several calls at your disposal for purpose of saving data, tracking interactions, and various API functionality.  You should instantiate the SocialVibeProxy class as soon as possible (preferrably in your constructor) to ensure we record the full amount of time spent on your engagement.
+Once you instantiate the SocialVibeProxy() class, you will have several calls at your disposal for purpose of saving data, tracking interactions, and various API functionality.  You should instantiate the SocialVibeProxy class as soon as possible (preferably in your constructor) to ensure we record the full amount of time spent on your engagement.
 
 
 Required API Calls
