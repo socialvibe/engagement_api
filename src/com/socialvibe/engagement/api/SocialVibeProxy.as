@@ -2,15 +2,13 @@ package com.socialvibe.engagement.api
 {
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.setTimout;
+	import flash.utils.setTimeout;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	
 	public class SocialVibeProxy extends EventDispatcher
 	{
-		public static const READY:String = "ENGAGEMENT_API_READY";
-		
-		private var _unconnectedMode:Boolean;
+		private var _unconnectedMode:Boolean = true;
 		
 		private var EngagemantAPI:Class;
 		private var EngagemantAPI_instance:*;
@@ -18,21 +16,6 @@ package com.socialvibe.engagement.api
 		private var FILE_NAME_SPACE:String = "com.socialvibe.engagement.EngagementAPI";
 		
 		public function SocialVibeProxy()
-		{
-			_unconnectedMode = true;
-		}
-		
-		public function set unconnectedMode(value:Boolean):void
-		{
-			_unconnectedMode = value;
-		}
-		
-		public function get unconnectedMode():Boolean
-		{
-			return _unconnectedMode;
-		}
-		
-		public function init():void
 		{
 			var domain:ApplicationDomain = new ApplicationDomain(ApplicationDomain.currentDomain);
 			
@@ -52,8 +35,16 @@ package com.socialvibe.engagement.api
 				_unconnectedMode = true;
 				trace ("ENGAGEMENT API NOT FOUND::Running in unconnected mode.");
 			}
-			
-			dispatchEvent(new Event(READY, true, true));
+		}
+		
+		public function set unconnectedMode(value:Boolean):void
+		{
+			_unconnectedMode = value;
+		}
+		
+		public function get unconnectedMode():Boolean
+		{
+			return _unconnectedMode;
 		}
 		
 		/* =================================
@@ -75,6 +66,14 @@ package com.socialvibe.engagement.api
 			}
 		}
 		
+		public function endEngage():void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::endEngage() - Congrats & Share screen should show now.");
+			else
+				EngagemantAPI_instance.endEngage();
+		}
+		
 		public function saveCommentData(comment:String):void
 		{
 			if (_unconnectedMode)
@@ -94,17 +93,30 @@ package com.socialvibe.engagement.api
 		public function getRecentComments():Array
 		{
 			if (_unconnectedMode)
+			{
 				trace ("SocialVibeProxy::getRecentComments()");
-			else
-				return EngagemantAPI_instance.getRecentComments();
+				
+				return [{body:"last comment text", ago:"31 minutes ago"}, {body:"2nd to last comment text", ago:"36 minutes ago"}, {body:"3rd comment text", ago:"56 minutes ago"}, {body:"4th comment text", ago:"1 hour ago"}, {body:"5th comment text", ago:"2 hours ago"}];
+			}
+			
+			return EngagemantAPI_instance.getRecentComments();
 		}
 		
 		public function getVoteSummary():Array
 		{
 			if (_unconnectedMode)
+			{
 				trace ("SocialVibeProxy::getRecentComments()");
-			else
-				return EngagemantAPI_instance.getVoteSummary();
+				
+				return [
+					{category:"1", label:"First answer choice from first question", vote:"1", vote_count:"25023"}, 
+					{category:"1", label:"Second answer choice from first question", vote:"2", vote_count:"18652"}, 
+					{category:"1", label:"Third answer choice from first question", vote:"3", vote_count:"15684"}, 
+					{category:"1", label:"Fourth answer choice from first question", vote:"4", vote_count:"568"}
+				];
+			}
+			
+			return EngagemantAPI_instance.getVoteSummary();
 		}
 		
 		
