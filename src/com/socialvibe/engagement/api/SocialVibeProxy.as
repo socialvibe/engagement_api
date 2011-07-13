@@ -96,6 +96,7 @@ package com.socialvibe.engagement.api
 			{
 				trace ("SocialVibeProxy::getRecentComments()");
 				
+				// returns placeholder comments //
 				return [{body:"last comment text", ago:"31 minutes ago"}, {body:"2nd to last comment text", ago:"36 minutes ago"}, {body:"3rd comment text", ago:"56 minutes ago"}, {body:"4th comment text", ago:"1 hour ago"}, {body:"5th comment text", ago:"2 hours ago"}];
 			}
 			
@@ -108,11 +109,12 @@ package com.socialvibe.engagement.api
 			{
 				trace ("SocialVibeProxy::getRecentComments()");
 				
+				// returns placeholder values for a single question poll with 4 answer choices //
 				return [
 					{category:"1", label:"First answer choice from first question", vote:"1", vote_count:"25023"}, 
 					{category:"1", label:"Second answer choice from first question", vote:"2", vote_count:"18652"}, 
 					{category:"1", label:"Third answer choice from first question", vote:"3", vote_count:"15684"}, 
-					{category:"1", label:"Fourth answer choice from first question", vote:"4", vote_count:"568"}
+					{category:"1", label:"Fourth answer choice from first question", vote:"4", vote_count:"1568"}
 				];
 			}
 			
