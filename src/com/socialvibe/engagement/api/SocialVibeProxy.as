@@ -139,7 +139,7 @@ package com.socialvibe.engagement.api
 		 * The structure of the comment data returned is an array of objects with a 'body' and 'ago' fields, like so:
 		 * {body:"COMMENT_TEXT", ago:"31 minutes ago"}
 		 * 
-		 * @returns an Array of comment data Objects. 
+		 * @return an Array of comment data Objects. 
 		 **/
 		public function getRecentComments():Array
 		{
@@ -159,7 +159,7 @@ package com.socialvibe.engagement.api
 		 * The structure of the vote data returned is an array of Objects with a 'category', 'vote', 'label', and 'vote_count' fields, like so:
 		 * {category:"1", label:"FIRST ANSWER CHOICE FROM THE FIRST QUESTION", vote:"1", vote_count:"25023"}
 		 * 
-		 * @returns an Array of vote data Objects. 
+		 * @return an Array of vote data Objects. 
 		 **/
 		public function getVoteSummary():Array
 		{
