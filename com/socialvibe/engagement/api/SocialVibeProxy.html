@@ -86,12 +86,14 @@
 		 The structure of the comment data returned is an array of objects with a 'body' and 'ago' fields, like so:
 		 {body:"COMMENT_TEXT", ago:"31 minutes ago"}
 		 
-		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code></td></tr></table></div><a name="getVoteSummary()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getVoteSummary</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getVoteSummary():Array</code><p></p><p></p><p>
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; an Array of comment data Objects. 
+		 </td></tr></table></div><a name="getVoteSummary()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getVoteSummary</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getVoteSummary():Array</code><p></p><p></p><p>
 		 Retrieves all vote data of users who have completed this engagement.  Note: there is a 15 minute cache delay on the data.
 		 The structure of the vote data returned is an array of Objects with a 'category', 'vote', 'label', and 'vote_count' fields, like so:
 		 {category:"1", label:"FIRST ANSWER CHOICE FROM THE FIRST QUESTION", vote:"1", vote_count:"25023"}
 		 
-		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code></td></tr></table></div><a name="loadExternalTracking()"></a><a name="loadExternalTracking(String,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">loadExternalTracking</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function loadExternalTracking(pixel_url:String, add_timestamp:Boolean = false):void</code><p></p><p></p><p>
+		 </p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code> &mdash; an Array of vote data Objects. 
+		 </td></tr></table></div><a name="loadExternalTracking()"></a><a name="loadExternalTracking(String,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">loadExternalTracking</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function loadExternalTracking(pixel_url:String, add_timestamp:Boolean = false):void</code><p></p><p></p><p>
 		 Loads a given tracking image pixel URL.
 		 
 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">pixel_url</span>:String</code> &mdash; the full URL path to an image pixel.
@@ -212,4 +214,4 @@
 		 Tracks the starting of a video asset.
 		 
 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:Object</code> (default = <code>null</code>)<code></code> &mdash; a label that is used in reports to identify the video asset (i.e. 'video 1').
-		 		 </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Wed Jul 13 2011, 11:35 AM -07:00  </center></div></body></html><!--<br/>Wed Jul 13 2011, 11:35 AM -07:00  -->
+		 		 </td></tr></table></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/>Wed Jul 13 2011, 06:12 PM -07:00  </center></div></body></html><!--<br/>Wed Jul 13 2011, 06:12 PM -07:00  -->
