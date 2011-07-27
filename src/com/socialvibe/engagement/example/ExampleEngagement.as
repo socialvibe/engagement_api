@@ -29,7 +29,7 @@ package com.socialvibe.engagement.example
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			// This is a very simple engagement.  Clicking on this square, makes the 'engage()' call to credit the user their user benefit (i.e. Farm Cash)
-			This particular engagement ends when the user clicks this button.
+			//This particular engagement ends when the user clicks this button.
 			var button:Sprite = new Sprite();
 			this.addChild(button);
 			button.graphics.beginFill(0x123456, 1);
