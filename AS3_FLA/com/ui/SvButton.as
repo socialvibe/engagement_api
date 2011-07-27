@@ -1,0 +1,1 @@
+﻿package com.ui{		import flash.display.*;	public class SvButton extends Sprite	{		public function SvButton()		{			this.graphics.beginFill(0x123456, 1);			this.graphics.drawRoundRect(0, 0, 150, 150, 12);			this.graphics.endFill();		}	}}

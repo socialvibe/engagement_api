@@ -10,11 +10,17 @@ This file will setup code hinting and load the SocialVibe Engagement API.
 - EngagementExample.as
 This is an example engagement using the SocialVibe Engagement API.
 
+- AS3_FLA/
+This folder contains an example of using Flash CS5 to create an engagement using the Engagement API.
+
+- AS3_FLA_Timeline/
+This folder contains an example of creating an timeline based engagement using Flash CS5 with the Engagement API.
+
 Documentation
 -------------
 http://socialvibe.github.com/engagement_api/com/socialvibe/engagement/api/SocialVibeProxy.html
 
-Environment Setup
+Environment Setup (in flash builder)
 -----------------
 1) Download engagement_api.swc from this GitHub project and place it somewhere you can find it later (typically in a 'lib' folder in your Flash project).
 2) In Flash Builder, open your existing AS3 project or create a new one.
@@ -23,6 +29,13 @@ Environment Setup
 5) Find the engagement_api.swc and add it.
 6) You should now be able to instantiate and use com.socialvibe.engagement.api.SocialVibeProxy in your Flash project.
 
+Using a FLA
+-----------
+1) Make sure you have downloaded engagement_api.swc as above.
+2) In your .fla environment, goto File->Publish settings...->'Flash' (on top)->'Settings...'
+3) Pick 'Library path' on the bottom bar.
+4) Then click on the 'F' button for SWC file addition.
+5) Then navigate to engagement_api.swc, and click on ok.
 
 API Usage
 -----------
@@ -43,5 +56,3 @@ Make this call after the engage() call at the point the engagement has ended and
 Notes
 --------------
 - If you use external SWFs or Files make sure your crossdomain.xml is setup to handle *.socialvibe.com, *.socialvi.be, and *.svnetwork.com.
-
-	
