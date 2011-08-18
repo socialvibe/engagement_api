@@ -54,6 +54,16 @@ Make this call to signal the completion event for the engagement.  The completio
 Make this call after the engage() call at the point the engagement has ended and to show the user a 'congrats & share screen'.
 
 
+Testing
+-------
+Test your engagement SWF within our engagement container using this test page:
+http://socialvibe.github.com/engagement_api/test.html
+
+1) Setup - Enter any setup data you need (all this data is optional)
+2) Load - Upload the SWF you've built using the engagement API
+3) Run - Your SWF will be loaded into our engagement container as it would in our live system.  As you run through the engagement, some debugging info will be output at the bottom.
+
+
 Notes
 --------------
 - If you use external SWFs or Files make sure your crossdomain.xml is setup to handle *.socialvibe.com, *.socialvi.be, and *.svnetwork.com.
