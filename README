@@ -67,3 +67,4 @@ http://socialvibe.github.com/engagement_api/test.html
 Notes
 --------------
 - If you use external SWFs or Files make sure your crossdomain.xml is setup to handle *.socialvibe.com, *.socialvi.be, and *.svnetwork.com.
+- If you are using Greensock's Tweening Platform, please use v11 release (http://www.greensock.com/v11/).

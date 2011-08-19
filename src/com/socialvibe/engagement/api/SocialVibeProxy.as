@@ -28,6 +28,11 @@ package com.socialvibe.engagement.api
 		 */
 		public function SocialVibeProxy()
 		{
+			connect();
+		}
+		
+		private function connect():void
+		{
 			var domain:ApplicationDomain = new ApplicationDomain(ApplicationDomain.currentDomain);
 			
 			try {
@@ -38,13 +43,17 @@ package com.socialvibe.engagement.api
 				if (EngagemantAPI_instance)
 				{
 					EngagemantAPI_instance.startEngage();
-					_unconnectedMode = false;	
+					_unconnectedMode = false;
+					
+					trace ("SocialVibeProxy::API Connected");
 				}
 			}
 			catch (e:Error)
 			{
 				_unconnectedMode = true;
-				trace ("ENGAGEMENT API NOT FOUND::Running in unconnected mode.");
+				
+				// retry to connect to API //
+				setTimeout(connect, 500);
 			}
 		}
 		

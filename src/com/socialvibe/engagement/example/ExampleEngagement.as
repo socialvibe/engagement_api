@@ -8,7 +8,6 @@ package com.socialvibe.engagement.example
 	
 	public class ExampleEngagement extends Sprite
 	{
-		
 		/**
 		 * This is the API you will be using for calls.
 		 * Please pay attention to the code hinting that comes up.
@@ -17,16 +16,16 @@ package com.socialvibe.engagement.example
 		
 		public function ExampleEngagement()
 		{
-			// 1. Initialize the API in your constructor
-			_api = new SocialVibeProxy();
-			
-			// 2. Listen for the ADDED_TO_STAGE event.  You will not be able to access the 'stage' object until then.
+			// 1. Listen for the ADDED_TO_STAGE event.  You will not be able to initialize the API or access the 'stage' until then.
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		private function init(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			// 2. Initialize the API
+			_api = new SocialVibeProxy();
 			
 			// This is a very simple engagement.  Clicking on this square, makes the 'engage()' call to credit the user their user benefit (i.e. Farm Cash)
 			//This particular engagement ends when the user clicks this button.
