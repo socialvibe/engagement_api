@@ -1,10 +1,11 @@
 package com.socialvibe.engagement.example
 {
+	import com.socialvibe.engagement.api.SocialVibeProxy;
+	
+	import flash.display.Graphics;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	
-	import com.socialvibe.engagement.api.SocialVibeProxy;
 	
 	public class ExampleEngagement extends Sprite
 	{
@@ -27,12 +28,16 @@ package com.socialvibe.engagement.example
 			// 2. Initialize the API
 			_api = new SocialVibeProxy();
 			
-			// This is a very simple engagement.  Clicking on this square, makes the 'engage()' call to credit the user their user benefit (i.e. Farm Cash)
+			var g:Graphics = this.graphics;
+			g.beginFill(0x123456, 1);
+			g.drawRect(0, 0, 750, 500);
+			
+			// This is a very simple engagement.  Clicking on this box, makes the 'engage()' call to credit the user their user benefit (i.e. Farm Cash)
 			//This particular engagement ends when the user clicks this button.
 			var button:Sprite = new Sprite();
 			this.addChild(button);
-			button.graphics.beginFill(0x123456, 1);
-			button.graphics.drawRect(0, 0, 150, 150);
+			button.graphics.beginFill(0xFFFFFF, 1);
+			button.graphics.drawRect(275, 200, 200, 50);
 			button.graphics.endFill();
 		
 			button.useHandCursor = button.buttonMode = true;
