@@ -1,10 +1,11 @@
 package com.socialvibe.engagement.api
 {
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.utils.setTimeout;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
+	import flash.utils.Proxy;
+	import flash.utils.flash_proxy;
+	import flash.utils.setTimeout;
 	
 	/**
 	 * The SocialVibeProxy class exposes all necessary functionality for an engagement to communicate with
@@ -13,7 +14,7 @@ package com.socialvibe.engagement.api
 	 * acts as an intermediary between the engagement and the engagement API.
 	 * 
 	 */
-	public class SocialVibeProxy extends EventDispatcher
+	dynamic public class SocialVibeProxy extends Proxy
 	{
 		private var _unconnectedMode:Boolean = true;
 		
@@ -581,6 +582,26 @@ package com.socialvibe.engagement.api
 				trace ("SocialVibeProxy::trackOtherInteraction(" + name + ", " + value + ")");
 			else
 				EngagemantAPI_instance.trackOtherInteraction(name, value);
+		}
+		
+		
+		/**
+		 * Proxys all other method calls to the API.
+		 * 
+		 * @param methodName The name of the method being invoked.
+		 * @param ... args arguments to pass to the called method.
+		 *
+		 **/
+		override flash_proxy function callProperty(methodName:*, ... args):*
+		{
+			try {
+
+				if (_unconnectedMode)
+					trace ("SocialVibeProxy::" + methodName + "(" + args.join(', ') + ")");
+				else
+					EngagemantAPI_instance[methodName].apply(args);
+
+			} catch (e:Error) { }
 		}
 	}
 }
