@@ -599,9 +599,11 @@ package com.socialvibe.engagement.api
 				if (_unconnectedMode)
 					trace ("SocialVibeProxy::" + methodName + "(" + args.join(', ') + ")");
 				else
-					EngagemantAPI_instance[methodName].apply(args);
+					EngagemantAPI_instance[methodName].apply(EngagemantAPI_instance, args);
 
-			} catch (e:Error) { }
+			} catch (e:Error) {
+				trace ("SocialVibeProxy::" + e);
+			}
 		}
 	}
 }
