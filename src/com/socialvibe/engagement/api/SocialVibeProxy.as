@@ -10,7 +10,7 @@ package com.socialvibe.engagement.api
 	/**
 	 * The SocialVibeProxy class exposes all necessary functionality for an engagement to communicate with
 	 * SocialVibe's servers, interact with the surrounding engagement container, tracking user interactions,
-	 * and access utility functions such as sharing on Facebook and popping up external pages.  The proxy
+	 * and access utility functions such as popping up external pages.  The proxy
 	 * acts as an intermediary between the engagement and the engagement API.
 	 * 
 	 */
@@ -110,6 +110,11 @@ package com.socialvibe.engagement.api
 				EngagemantAPI_instance.endEngage();
 		}
 		
+		
+		/* =================================
+		   DATA API
+		================================= */
+		
 		/**
 		 * Saves comment data made by the user.  Upon completion of the engagement (i.e. when engage() is called), this comment data
 		 * is saved to our system.
@@ -191,7 +196,7 @@ package com.socialvibe.engagement.api
 		
 		
 		/* =================================
-			CONTAINER API
+		   CONTAINER API
 		================================= */
 		
 		/**
@@ -232,106 +237,29 @@ package com.socialvibe.engagement.api
 		
 		
 		/* =================================
-			SOCIAL API
+		   EXTERNAL API
 		================================= */
 		
 		/**
-		 * Pops up the Facebook share feed dialog.  The Facebook share interaction is also tracked when 
-		 * this is called.
-		 *
-		 **/
-		public function shareToFacebook():void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::shareToFacebook()");
-			else
-				EngagemantAPI_instance.shareToFacebook();
-		}
-		
-		/**
-		 * Pops up the Twitter share dialog.  The Twitter share interaction is also tracked when 
-		 * this is called.
-		 *
-		 **/
-		public function shareToTwitter():void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::shareToTwitter()");
-			else
-				EngagemantAPI_instance.shareToTwitter();
-		}
-		
-		/**
-		 * Removes the Facebook/Twitter share options on the "Congrats &amp; Share" screen when the engagement ends.
-		 *
-		 **/
-		public function disableSharing():void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::disableSharing()");
-			else
-				EngagemantAPI_instance.disableSharing();
-		}
-		
-		
-		/* =================================
-			EXTERNAL API
-		================================= */
-		
-		/**
-		 * Pops up an external browser window from the engagement.  This function should be used for
-		 * popping up Facebook pages.  The Facebook popup interaction is also tracked when this is called.
-		 *
-		 * @param url the full URL path of the Facebook page.  If none is specified, uses the CLICK_TAG.
-		 * @param width the width of the popup window, in pixels.  Default: 1024 pixels.
-		 * @param height the height of the popup window, in pixels.  Default: 800 pixels.
-		 * 
-		 **/
-		public function popupFBPage(url:String = null, width:Number = 1024, height:Number = 800):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::popupFBPage(" + url + ", " + width + ", " + height + ")");
-			else
-				EngagemantAPI_instance.popupFBPage(url, width, height);
-		}
-		
-		/**
-		 * Pops up an external browser window from the engagement.  This function should be used for
-		 * normal websites.  The website popup interaction is also tracked when this is called.
+		 * Opens an external browser window from the engagement.  The URL click interaction is also tracked when this is called.
 		 *
 		 * @param url the full URL path of the website.  If none is specified, uses the CLICK_TAG.
+		 * @param type the type of window to open URL in. Possible values: 'popup', 'popunder', or 'tab'.  Default: 'popup'.
 		 * @param width the width of the popup window, in pixels.  Default: 1024 pixels.
 		 * @param height the height of the popup window, in pixels.  Default: 800 pixels.
 		 * 
 		 **/
-		public function popupWebsite(url:String = null, width:Number = 1024, height:Number = 800):void
+		public function popupWebsite(url:String = null, type:String = 'popup', width:Number = 1024, height:Number = 800):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::popupWebsite(" + url + ", " + width + ", " + height + ")");
+				trace ("SocialVibeProxy::popupWebsite(" + url + ", " + type + ", " + width + ", " + height + ")");
 			else
-				EngagemantAPI_instance.popupWebsite(url, width, height);
-		}
-		
-		/**
-		 * Pops up an external browser window from the engagement.  This function should be used for
-		 * terms, rules, or promo websites.  The Terms/Rules/Promo popup interaction is also tracked when this is called.
-		 *
-		 * @param url the full URL path of the terms, rules, or promo website.  If none is specified, uses the CLICK_TAG.
-		 * @param width the width of the popup window, in pixels.  Default: 1024 pixels.
-		 * @param height the height of the popup window, in pixels.  Default: 800 pixels.
-		 * 
-		 **/
-		public function popupTermsPage(url:String = null, width:Number = 1024, height:Number = 800):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::popupTermsPage(" + url + ", " + width + ", " + height + ")");
-			else
-				EngagemantAPI_instance.popupTermsPage(url, width, height);
+				EngagemantAPI_instance.popupWebsite(url, type, width, height);
 		}
 		
 		
 		/* =================================
-			TRACKING API
+		   TRACKING API
 		================================= */
 		
 		/**
@@ -350,206 +278,19 @@ package com.socialvibe.engagement.api
 		}
 		
 		/**
-		 * Tracks the user interaction of navigating to the next step or frame in the engagement.
+		 * Tracks a single user interaction.
 		 * 
-		 * @param value a label that is used in reports to identify the kind of next navigation (i.e. 'step 1').
+		 * @param category a label that is used in reports to identify the category of this user interaction (i.e. 'map').
+		 * @param name a label that is used in reports to identify this user interaction within a category (i.e. 'search').
+		 * @param value another label that is used in reports to further identify this interaction (i.e. 'Los Angeles, CA').
 		 *
 		 **/
-		public function trackNavigationNext(value:Object = null):void
+		public function trackInteraction(category:String, name:String, value:Object = null):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackNavigationNext(" + value + ")");
+				trace ("SocialVibeProxy::trackInteraction(" + category + ", " + name + ", " + value + ")");
 			else
-				EngagemantAPI_instance.trackNavigationNext(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of navigating to a specific step or frame in the engagement.  Use this to track
-		 * user interactions for going to previous steps or jumping ahead multiple steps.
-		 * 
-		 * @param value a label that is used in reports to identify the kind of 'goto' navigation (i.e. 'back to step 1').
-		 *
-		 **/
-		public function trackNavigationGoto(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackNavigationGoto(" + value + ")");
-			else
-				EngagemantAPI_instance.trackNavigationGoto(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of skipping a step or frame in the engagement.  A typical example is skipping a
-		 * step in the engagement that asks the user to share on Facebook.
-		 * 
-		 * @param value a label that is used in reports to identify the kind of skip navigation (i.e. 'FB share on step 2').
-		 * @param isShare a flag to signal if this skip interaction is for skipping webcam functionality.
-		 * @param isWebcam a flag to signal if this skip interaction is for skipping share functionality.
-		 *
-		 **/
-		public function trackNavigationSkip(value:Object = null, isShare:Boolean = false, isWebcam:Boolean = false):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackNavigationSkip(" + value + ", " + isShare + ", " + isWebcam + ")");
-			else
-				EngagemantAPI_instance.trackNavigationSkip(value, isShare, isWebcam);
-		}
-		
-		/**
-		 * Tracks the user interaction bringing up a dialog within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the kind of dialog (i.e. 'more info dialog').
-		 * @param isWebcam a flag to signal if this dialog is for using the webcam.
-		 *
-		 **/
-		public function trackNavigationDialog(value:Object = null, isWebcam:Boolean = false):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackNavigationDialog(" + value + ", " + isWebcam + ")");
-			else
-				EngagemantAPI_instance.trackNavigationDialog(value, isWebcam);
-		}
-		
-		/**
-		 * Tracks the starting of a video asset.
-		 * 
-		 * @param value a label that is used in reports to identify the video asset (i.e. 'video 1').
-		 *
-		 **/
-		public function trackVideoStarted(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackVideoStarted(" + value + ")");
-			else
-				EngagemantAPI_instance.trackVideoStarted(value);
-		}
-		
-		/**
-		 * Tracks the completion of a video asset.
-		 * 
-		 * @param value a label that is used in reports to identify the video asset (i.e. 'video 1').
-		 *
-		 **/
-		public function trackVideoCompleted(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackVideoCompleted(" + value + ")");
-			else
-				EngagemantAPI_instance.trackVideoCompleted(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of starting a game within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the game (i.e. 'word search game').
-		 *
-		 **/
-		public function trackGameStart(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackGameStart(" + value + ")");
-			else
-				EngagemantAPI_instance.trackGameStart(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of completing a game within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the game (i.e. 'word search game').
-		 *
-		 **/
-		public function trackGameEnd(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackGameEnd(" + value + ")");
-			else
-				EngagemantAPI_instance.trackGameEnd(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of uploading a file within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the uploaded file (i.e. the url of the uploaded file).
-		 * @param isPhoto a flag that signals whether this upload is for a photo.
-		 * @param isVideo a flag that signals whether this upload is for a video.
-		 *
-		 **/
-		public function trackUpload(value:Object = null, isPhoto:Boolean = false, isVideo:Boolean = false):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackUpload(" + value + ", " + isPhoto + ", " + isVideo + ")");
-			else
-				EngagemantAPI_instance.trackUpload(value, isPhoto, isVideo);
-		}
-		
-		/**
-		 * Tracks the user interaction of playing a sound file within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the sound file (i.e. 'sound clip 1').
-		 *
-		 **/
-		public function trackSoundPlayed(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackSoundPlayed(" + value + ")");
-			else
-				EngagemantAPI_instance.trackSoundPlayed(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of popping up an external website within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the popup (i.e. the URL of the popup).
-		 *
-		 **/
-		public function trackExternalPopup(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackExternalPopup(" + value + ")");
-			else
-				EngagemantAPI_instance.trackExternalPopup(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of popping up a Facebook page within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the popup (i.e. the URL of the Facebook page).
-		 *
-		 **/
-		public function trackExternalFBPopup(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackExternalFBPopup(" + value + ")");
-			else
-				EngagemantAPI_instance.trackExternalFBPopup(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of downloading a file from within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the download (i.e. the URL of the downloaded file).
-		 *
-		 **/
-		public function trackDownload(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackDownload(" + value + ")");
-			else
-				EngagemantAPI_instance.trackDownload(value);
-		}
-		
-		/**
-		 * Tracks the user interaction of starting a print job from within the engagement.
-		 * 
-		 * @param value a label that is used in reports to identify the print job (i.e. 'print menu').
-		 *
-		 **/
-		public function trackPrint(value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackPrint(" + value + ")");
-			else
-				EngagemantAPI_instance.trackPrint(value);
+				EngagemantAPI_instance.trackInteraction(category, name, value);
 		}
 		
 		/**
@@ -569,23 +310,6 @@ package com.socialvibe.engagement.api
 		}
 		
 		/**
-		 * A catch-all tracking function for all other types of user interactions.  Use this when you want to track something that
-		 * is not covered by the other specific tracking functions.
-		 * 
-		 * @param name a label that is used in reports to identify this user interaction (i.e. 'google maps').
-		 * @param value another label that is used in reports to further identify this 'other' interaction (i.e. 'search').
-		 *
-		 **/
-		public function trackOtherInteraction(name:String, value:Object = null):void
-		{
-			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackOtherInteraction(" + name + ", " + value + ")");
-			else
-				EngagemantAPI_instance.trackOtherInteraction(name, value);
-		}
-		
-		
-		/**
 		 * Proxys all other method calls to the API.
 		 * 
 		 * @param methodName The name of the method being invoked.
@@ -595,12 +319,12 @@ package com.socialvibe.engagement.api
 		override flash_proxy function callProperty(methodName:*, ... args):*
 		{
 			try {
-
+				
 				if (_unconnectedMode)
 					trace ("SocialVibeProxy::" + methodName + "(" + args.join(', ') + ")");
 				else
 					EngagemantAPI_instance[methodName].apply(EngagemantAPI_instance, args);
-
+				
 			} catch (e:Error) {
 				trace ("SocialVibeProxy::" + e);
 			}
