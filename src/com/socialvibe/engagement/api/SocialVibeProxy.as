@@ -224,6 +224,42 @@ package com.socialvibe.engagement.api
 		}
 		
 		/**
+		 *  Returns the partner ID hash, which is unique to each partner.
+		 *
+		 **/
+		public function get partner_id_hash():String
+		{
+			if (_unconnectedMode)
+				return '';
+			else
+				return EngagemantAPI_instance.partner_id_hash;
+		}
+		
+		/**
+		 *  Returns the amount of the currency granted to the user for completing the engagement.
+		 *
+		 **/
+		public function get currency_amount():Number
+		{
+			if (_unconnectedMode)
+				return 2;
+			else
+				return EngagemantAPI_instance.currency_amount;
+		}
+		
+		/**
+		 *  Returns the name of the currency granted to the user for completing the engagement (i.e. 'Farm Cash').
+		 *
+		 **/
+		public function get currency_label():String
+		{
+			if (_unconnectedMode)
+				return 'Game Cash';
+			else
+				return EngagemantAPI_instance.currency_label;
+		}
+		
+		/**
 		 *  Closes the entire engagement container.  This function is uncommonly used.
 		 *
 		 **/
