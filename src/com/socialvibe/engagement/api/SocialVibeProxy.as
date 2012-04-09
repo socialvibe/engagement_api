@@ -120,14 +120,15 @@ package com.socialvibe.engagement.api
 		 * is saved to our system.
 		 * 
 		 * @param comment a user inputed string of any length.
+		 * @param label an identifier for the data (i.e. 'email', 'answer1', etc).
 		 *
 		 **/
-		public function saveCommentData(comment:String):void
+		public function saveCommentData(comment:String, label:String = null):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::saveCommentData(" + comment + ")");
+				trace ("SocialVibeProxy::saveCommentData(" + comment + ", " + label + ")");
 			else
-				EngagemantAPI_instance.saveCommentData(comment);
+				EngagemantAPI_instance.saveCommentData(comment, label);
 		}
 		
 		/**
