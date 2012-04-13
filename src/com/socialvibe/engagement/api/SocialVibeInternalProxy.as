@@ -115,14 +115,15 @@ package com.socialvibe.engagement.api
 		 * is saved to our system.
 		 * 
 		 * @param comment a user inputed string of any length.
+		 * @param label an identifier for the data (i.e. 'email', 'answer1', etc).
 		 *
 		 **/
-		public function saveCommentData(comment:String):void
+		public function saveCommentData(comment:String, label:String = null):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeInternalProxy::saveCommentData(" + comment + ")");
+				trace ("SocialVibeInternalProxy::saveCommentData(" + comment + ", " + label + ")");
 			else
-				EngagemantAPI_instance.saveCommentData(comment);
+				EngagemantAPI_instance.saveCommentData(comment, label);
 		}
 		
 		/**
@@ -336,16 +337,17 @@ package com.socialvibe.engagement.api
 		 * normal websites.  The website popup interaction is also tracked when this is called.
 		 *
 		 * @param url the full URL path of the website.  If none is specified, uses the CLICK_TAG.
+		 * @param type the type of window to open URL in. Possible values: 'popup', 'popunder', or 'tab'.  Default: 'popup'.
 		 * @param width the width of the popup window, in pixels.  Default: 1024 pixels.
 		 * @param height the height of the popup window, in pixels.  Default: 800 pixels.
 		 * 
 		 **/
-		public function popupWebsite(url:String = null, width:Number = 1024, height:Number = 800):void
+		public function popupWebsite(url:String = null, type:String = 'popup', width:Number = 1024, height:Number = 800):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeInternalProxy::popupWebsite(" + url + ", " + width + ", " + height + ")");
+				trace ("SocialVibeInternalProxy::popupWebsite(" + url + ", " + type + ", " + width + ", " + height + ")");
 			else
-				EngagemantAPI_instance.popupWebsite(url, width, height);
+				EngagemantAPI_instance.popupWebsite(url, type, width, height);
 		}
 		
 		/**
@@ -619,6 +621,23 @@ package com.socialvibe.engagement.api
 			else
 				EngagemantAPI_instance.trackOtherInteraction(name, value);
 		}
+		
+		/**
+		 * Tracks a single user interaction.
+		 * 
+		 * @param category a label that is used in reports to identify the category of this user interaction (i.e. 'map').
+		 * @param name a label that is used in reports to identify this user interaction within a category (i.e. 'search').
+		 * @param value another label that is used in reports to further identify this interaction (i.e. 'Los Angeles, CA').
+		 *
+		 **/
+		public function trackInteraction(category:String, name:String, value:Object = null):void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::trackInteraction(" + category + ", " + name + ", " + value + ")");
+			else
+				EngagemantAPI_instance.trackInteraction(category, name, value);
+		}
+		
 		
 		
 		/**
