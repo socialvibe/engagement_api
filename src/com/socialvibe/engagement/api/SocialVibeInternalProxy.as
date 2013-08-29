@@ -654,11 +654,13 @@ package com.socialvibe.engagement.api
 				if (_unconnectedMode)
 					trace ("SocialVibeInternalProxy::" + methodName + "(" + args.join(', ') + ")");
 				else
-					EngagemantAPI_instance[methodName].apply(EngagemantAPI_instance, args);
+					return EngagemantAPI_instance[methodName].apply(EngagemantAPI_instance, args);
 
 			} catch (e:Error) {
 				trace ("SocialVibeInternalProxy::" + e);
 			}
+			
+			return {};
 		}
 	}
 }
