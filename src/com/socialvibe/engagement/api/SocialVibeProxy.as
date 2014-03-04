@@ -294,6 +294,50 @@ package com.socialvibe.engagement.api
 				EngagemantAPI_instance.popupWebsite(url, type, width, height);
 		}
 		
+		/* =================================
+		STEP MANAGEMENT API
+		================================= */
+		
+		/**
+		 * Sets the current index of the step (or phase) of an engagement.  The step index is used internally to track performance
+		 * of user flow.  For example, we use step index to know where a user drops off, which steps have the most interaction, etc.
+		 *
+		 * @param index an int that represents which step the engagement is in.  The value should be between 1-999.
+		 * 
+		 **/
+		public function setCurrentStep(index:int):void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::setCurrentStep(" + index + ")");
+			else
+				EngagemantAPI_instance.setCurrentStep(index);
+		}
+		
+		/**
+		 * Returns the current step index.
+		 * 
+		 **/
+		public function getCurrentStep():int
+		{
+			if (_unconnectedMode)
+				return 1;
+			else
+				return EngagemantAPI_instance.getCurrentStep();
+		}
+		
+		/**
+		 * Increments the current step index of this engagement.  The step index is used internally to track performance
+		 * of user flow.
+		 * 
+		 **/
+		public function incrementCurrentStep():void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::incrementCurrentStep()");
+			else
+				EngagemantAPI_instance.incrementCurrentStep();
+		}
+		
 		
 		/* =================================
 		   TRACKING API
