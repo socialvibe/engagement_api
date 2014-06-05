@@ -1,8 +1,8 @@
 package com.socialvibe.engagement.api
 {
-	import flash.events.Event;
+	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.system.ApplicationDomain;
-	import flash.system.LoaderContext;
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 	import flash.utils.setTimeout;
@@ -272,6 +272,79 @@ package com.socialvibe.engagement.api
 				EngagemantAPI_instance.closeEngagement();
 		}
 		
+		
+		/* =================================
+		BUILDER API
+		================================= */
+		
+		/**
+		 * Navigates the engagement to the next step.  Tracking is handled by this call so no need to double track.
+		 *
+		 * 
+		 **/
+		public function nextStep():void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::nextStep()");
+			else
+				EngagemantAPI_instance.nextStep();
+		}
+		
+		/**
+		 * Navigates the engagement to a particular step.  Tracking is handled by this call so no need to double track.
+		 *
+		 * @param stepName the name of the step to navigate to (i.e. 'step 3').
+		 * 
+		 **/
+		public function gotoStep(stepName:String):void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::gotoStep(" + stepName + ")");
+			else
+				EngagemantAPI_instance.nextStep();
+		}
+		
+		/**
+		 * Retrieve a particular control in the engagement.
+		 *
+		 * @param controlName the name of the control in the builder tool (i.e. 'button 21').
+		 * 
+		 **/
+		public function getControl(controlName:String):DisplayObject
+		{
+			if (_unconnectedMode)
+				return new Sprite();
+			else
+				return EngagemantAPI_instance.getControl(controlName);
+		}
+		
+		/**
+		 * Remove a particular control in the engagement.
+		 *
+		 * @param controlName the name of the control in the builder tool (i.e. 'text 11').
+		 * 
+		 **/
+		public function removeControl(controlName:String):void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::removeControl(" + controlName + ")");
+			else
+				EngagemantAPI_instance.removeControl(controlName);
+		}
+		
+		/**
+		 * Remove a particular step from the engagement.
+		 *
+		 * @param stepName the name of the step (i.e. 'step 6').
+		 * 
+		 **/
+		public function removeStep(stepName:String):void
+		{
+			if (_unconnectedMode)
+				trace ("SocialVibeProxy::nextStep(" + stepName + ")");
+			else
+				EngagemantAPI_instance.removeStep(stepName);
+		}
 		
 		/* =================================
 		   EXTERNAL API
