@@ -1,4 +1,4 @@
-package com.socialvibe.engagement.api
+package com.truex.engagement.api
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -8,13 +8,13 @@ package com.socialvibe.engagement.api
 	import flash.utils.setTimeout;
 	
 	/**
-	 * The SocialVibeProxy class exposes all necessary functionality for an engagement to communicate with
-	 * SocialVibe's servers, interact with the surrounding engagement container, tracking user interactions,
+	 * The TrueXProxy class exposes all necessary functionality for an engagement to communicate with
+	 * TrueX's servers, interact with the surrounding engagement container, tracking user interactions,
 	 * and access utility functions such as popping up external pages.  The proxy
 	 * acts as an intermediary between the engagement and the engagement API.
 	 * 
 	 */
-	dynamic public class SocialVibeProxy extends Proxy
+	dynamic public class TrueXProxy extends Proxy
 	{
 		private var _unconnectedMode:Boolean = true;
 		
@@ -24,10 +24,10 @@ package com.socialvibe.engagement.api
 		private var FILE_NAME_SPACE:String = "com.socialvibe.engagement.EngagementAPI";
 		
 		/**
-		 * Creates a new SocialVibeProxy instance.
+		 * Creates a new TrueXProxy instance.
 		 * 
 		 */
-		public function SocialVibeProxy()
+		public function TrueXProxy()
 		{
 			connect();
 		}
@@ -46,7 +46,7 @@ package com.socialvibe.engagement.api
 					EngagemantAPI_instance.startEngage();
 					_unconnectedMode = false;
 					
-					trace ("SocialVibeProxy::API Connected");
+					trace ("TrueXProxy::API Connected");
 				}
 			}
 			catch (e:Error)
@@ -59,8 +59,8 @@ package com.socialvibe.engagement.api
 		}
 		
 		/**
-		 * Indicates whether the proxy is connected to SocialVibe's engagement API.  A value of 'true' means the proxy is not connected.
-		 * This is case when running locally outside of the SocialVibe engagement container.
+		 * Indicates whether the proxy is connected to TrueX's engagement API.  A value of 'true' means the proxy is not connected.
+		 * This is case when running locally outside of the TrueX engagement container.
 		 *
 		 **/
 		public function get unconnectedMode():Boolean
@@ -82,7 +82,7 @@ package com.socialvibe.engagement.api
 		{
 			if (_unconnectedMode)
 			{
-				trace ("SocialVibeProxy::engage()");
+				trace ("TrueXProxy::engage()");
 				if (onComplete != null)
 				{
 					setTimeout(onComplete, 1000);
@@ -105,14 +105,14 @@ package com.socialvibe.engagement.api
 		public function endEngage():void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::endEngage() - Congrats & Share screen should show now.");
+				trace ("TrueXProxy::endEngage() - Congrats & Share screen should show now.");
 			else
 				EngagemantAPI_instance.endEngage();
 		}
 		
 		
 		/* =================================
-		   DATA API
+		DATA API
 		================================= */
 		
 		/**
@@ -126,7 +126,7 @@ package com.socialvibe.engagement.api
 		public function saveCommentData(comment:String, label:String = null):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::saveCommentData(" + comment + ", " + label + ")");
+				trace ("TrueXProxy::saveCommentData(" + comment + ", " + label + ")");
 			else
 				EngagemantAPI_instance.saveCommentData(comment, label);
 		}
@@ -145,7 +145,7 @@ package com.socialvibe.engagement.api
 		public function saveVoteData(category:Number, label:String, vote:Number):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::saveVoteData(" + category + ", " + label + ", " + vote + ")");
+				trace ("TrueXProxy::saveVoteData(" + category + ", " + label + ", " + vote + ")");
 			else
 				EngagemantAPI_instance.saveVoteData(category, label, vote);
 		}
@@ -161,7 +161,7 @@ package com.socialvibe.engagement.api
 		{
 			if (_unconnectedMode)
 			{
-				trace ("SocialVibeProxy::getRecentComments()");
+				trace ("TrueXProxy::getRecentComments()");
 				
 				// returns placeholder comments //
 				return [{body:"last comment text", ago:"31 minutes ago"}, {body:"2nd to last comment text", ago:"36 minutes ago"}, {body:"3rd comment text", ago:"56 minutes ago"}, {body:"4th comment text", ago:"1 hour ago"}, {body:"5th comment text", ago:"2 hours ago"}];
@@ -181,7 +181,7 @@ package com.socialvibe.engagement.api
 		{
 			if (_unconnectedMode)
 			{
-				trace ("SocialVibeProxy::getRecentComments()");
+				trace ("TrueXProxy::getRecentComments()");
 				
 				// returns placeholder values for a single question poll with 4 answer choices //
 				return [
@@ -197,7 +197,7 @@ package com.socialvibe.engagement.api
 		
 		
 		/* =================================
-		   CONTAINER API
+		CONTAINER API
 		================================= */
 		
 		/**
@@ -267,7 +267,7 @@ package com.socialvibe.engagement.api
 		public function closeEngagement():void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::closeEngagement()");
+				trace ("TrueXProxy::closeEngagement()");
 			else
 				EngagemantAPI_instance.closeEngagement();
 		}
@@ -285,7 +285,7 @@ package com.socialvibe.engagement.api
 		public function nextStep():void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::nextStep()");
+				trace ("TrueXProxy::nextStep()");
 			else
 				EngagemantAPI_instance.nextStep();
 		}
@@ -299,7 +299,7 @@ package com.socialvibe.engagement.api
 		public function gotoStep(stepName:String):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::gotoStep(" + stepName + ")");
+				trace ("TrueXProxy::gotoStep(" + stepName + ")");
 			else
 				EngagemantAPI_instance.gotoStep(stepName);
 		}
@@ -327,7 +327,7 @@ package com.socialvibe.engagement.api
 		public function removeControl(controlName:String):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::removeControl(" + controlName + ")");
+				trace ("TrueXProxy::removeControl(" + controlName + ")");
 			else
 				EngagemantAPI_instance.removeControl(controlName);
 		}
@@ -341,13 +341,13 @@ package com.socialvibe.engagement.api
 		public function removeStep(stepName:String):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::nextStep(" + stepName + ")");
+				trace ("TrueXProxy::nextStep(" + stepName + ")");
 			else
 				EngagemantAPI_instance.removeStep(stepName);
 		}
 		
 		/* =================================
-		   EXTERNAL API
+		EXTERNAL API
 		================================= */
 		
 		/**
@@ -362,7 +362,7 @@ package com.socialvibe.engagement.api
 		public function popupWebsite(url:String = null, type:String = 'popup', width:Number = 1024, height:Number = 800):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::popupWebsite(" + url + ", " + type + ", " + width + ", " + height + ")");
+				trace ("TrueXProxy::popupWebsite(" + url + ", " + type + ", " + width + ", " + height + ")");
 			else
 				EngagemantAPI_instance.popupWebsite(url, type, width, height);
 		}
@@ -381,7 +381,7 @@ package com.socialvibe.engagement.api
 		public function setCurrentStep(index:int):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::setCurrentStep(" + index + ")");
+				trace ("TrueXProxy::setCurrentStep(" + index + ")");
 			else
 				EngagemantAPI_instance.setCurrentStep(index);
 		}
@@ -406,14 +406,14 @@ package com.socialvibe.engagement.api
 		public function incrementCurrentStep():void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::incrementCurrentStep()");
+				trace ("TrueXProxy::incrementCurrentStep()");
 			else
 				EngagemantAPI_instance.incrementCurrentStep();
 		}
 		
 		
 		/* =================================
-		   TRACKING API
+		TRACKING API
 		================================= */
 		
 		/**
@@ -426,7 +426,7 @@ package com.socialvibe.engagement.api
 		public function loadExternalTracking(pixel_url:String, add_timestamp:Boolean = false):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::loadExternalTracking(" + pixel_url + ", " + add_timestamp + ")");
+				trace ("TrueXProxy::loadExternalTracking(" + pixel_url + ", " + add_timestamp + ")");
 			else
 				EngagemantAPI_instance.loadExternalTracking(pixel_url, add_timestamp);
 		}
@@ -442,7 +442,7 @@ package com.socialvibe.engagement.api
 		public function trackInteraction(category:String, name:String, value:Object = null):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackInteraction(" + category + ", " + name + ", " + value + ")");
+				trace ("TrueXProxy::trackInteraction(" + category + ", " + name + ", " + value + ")");
 			else
 				EngagemantAPI_instance.trackInteraction(category, name, value);
 		}
@@ -458,7 +458,7 @@ package com.socialvibe.engagement.api
 		public function trackAggregateInteraction(name:String, interaction_count:Number):void
 		{
 			if (_unconnectedMode)
-				trace ("SocialVibeProxy::trackAggregateInteraction(" + name + ", " + interaction_count + ")");
+				trace ("TrueXProxy::trackAggregateInteraction(" + name + ", " + interaction_count + ")");
 			else
 				EngagemantAPI_instance.trackAggregateInteraction(name, interaction_count);
 		}
@@ -475,15 +475,16 @@ package com.socialvibe.engagement.api
 			try {
 				
 				if (_unconnectedMode)
-					trace ("SocialVibeProxy::" + methodName + "(" + args.join(', ') + ")");
+					trace ("TrueXProxy::" + methodName + "(" + args.join(', ') + ")");
 				else
 					return EngagemantAPI_instance[methodName].apply(EngagemantAPI_instance, args);
 				
 			} catch (e:Error) {
-				trace ("SocialVibeProxy::" + e);
+				trace ("TrueXProxy::" + e);
 			}
 			
 			return {};
 		}
 	}
 }
+
